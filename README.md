@@ -12,7 +12,7 @@ You can install the latest build of this image by running `docker pull tmp6154/p
 
 Let's assume you want to convert a `sample.ttyrec` in the current directory into GIF:
 
-    docker run -v $PWD:/test tmp6154/pyttygif-render /test/sample /test/sample.gif
+    docker run -v $PWD:/test tmp6154/pyttygif-render /test/sample.ttyrec /test/sample.gif
 
 This would produce a `sample.gif` in the current directory, converted with default settings.
 
