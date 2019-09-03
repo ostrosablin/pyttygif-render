@@ -89,39 +89,39 @@ Most options are intended to have sane defaults, but can be customized.
 
 ### GIF conversion settings
 
-`-s` allows to speed up or slow down GIF (relatively to original ttyrec speed) by a floating-point factor. Default speed is 1.0 (original speed).
-`-l` allows to set a number of loops for resulting GIF. It defaults to 1 (single play). You can set it to integer number of loops, or 0 to loop infinitely.
-`-L` allows to set last frame display time (floating point number of seconds) for looping GIFs and defaults to 5.0 seconds.
-`-o` sets the GIF optimization level and defaults to 2. To achieve maximum optimization, you can set it to 3, and to get more speed at the cost of the resulting GIF size - you can set optimization to lower level.
-`-f` sets the number of frames for pyttygif to screenshot per second. It defaults to 25, but if resulting GIF has stuttering or frame skip artifacts - you can lower it.
-`-c` allows to cap delay of single frame to at most this number of seconds (floating point). It's disabled by default. For example, if it's set to 5.0, then any frames taking longer than 5 seconds would display for exactly 5 seconds.
-`-x` sets lossiness for gifsicle lossy mode.
+`-s` allows to speed up or slow down GIF (relatively to original ttyrec speed) by a floating-point factor. Default speed is 1.0 (original speed).  
+`-l` allows to set a number of loops for resulting GIF. It defaults to 1 (single play). You can set it to integer number of loops, or 0 to loop infinitely.  
+`-L` allows to set last frame display time (floating point number of seconds) for looping GIFs and defaults to 5.0 seconds.  
+`-o` sets the GIF optimization level and defaults to 2. To achieve maximum optimization, you can set it to 3, and to get more speed at the cost of the resulting GIF size - you can set optimization to lower level.  
+`-f` sets the number of frames for pyttygif to screenshot per second. It defaults to 25, but if resulting GIF has stuttering or frame skip artifacts - you can lower it.  
+`-c` allows to cap delay of single frame to at most this number of seconds (floating point). It's disabled by default. For example, if it's set to 5.0, then any frames taking longer than 5 seconds would display for exactly 5 seconds.  
+`-x` sets lossiness for gifsicle lossy mode.  
 
 ### Konsole visualization settings
 
-`-W` sets terminal size in columns (width). Defaults to 80.
-`-H` sets terminal size in rows (height). Defaults to 24.
-`-S` sets the font size in pts. Defaults to 9.
-`--no-antialias` disables font antialiasing.
-`--bold-intense` prints bright colors with bold font.
-`--font-linechars` forces to use native font's line-drawing characters.
-`--font` sets name of font to use. Defaults to "DejaVu Sans Mono".
-`--font-family` sets family of font to use. Defaults to "Regular".
-`--color-scheme` sets the Konsole color scheme to use. Defaults to "Linux".
-`--cursor-shape` sets the shape of cursor, where 0 - block, 1 - vertical bar, 2 - underscore.
+`-W` sets terminal size in columns (width). Defaults to 80.  
+`-H` sets terminal size in rows (height). Defaults to 24.  
+`-S` sets the font size in pts. Defaults to 9.  
+`--no-antialias` disables font antialiasing.  
+`--bold-intense` prints bright colors with bold font.  
+`--font-linechars` forces to use native font's line-drawing characters.  
+`--font` sets name of font to use. Defaults to "DejaVu Sans Mono".  
+`--font-family` sets family of font to use. Defaults to "Regular".  
+`--color-scheme` sets the Konsole color scheme to use. Defaults to "Linux".  
+`--cursor-shape` sets the shape of cursor, where 0 - block, 1 - vertical bar, 2 - underscore. Defaults to 0.  
 
 ### Video conversion settings
 
-`-v` enables video conversion, and after finishing GIF creation, ffmpeg would be launched to produce MP4 file.
-`-r` sets the video framerate and defaults to 30.
-`--video-only` forces GIF to be deleted, keeping only MP4 video.
-`--crf` sets H.264 constant rate factor. It defaults to 22, which should give a good quality.
-`--tune` sets fine-tuning codec preset. It defaults to "animation".
-`--preset` sets the codec preset. It defaults to "medium".
+`-v` enables video conversion, and after finishing GIF creation, ffmpeg would be launched to produce MP4 file.  
+`-r` sets the video framerate and defaults to 30.  
+`--video-only` forces GIF to be deleted, keeping only MP4 video.  
+`--crf` sets H.264 constant rate factor. It defaults to 22, which should give a good quality.  
+`--tune` sets fine-tuning codec preset. It defaults to "animation".  
+`--preset` sets the codec preset. It defaults to "medium".  
 
 ### Xvfb settings
 
-`--screen-size` sets the Xvfb screen size. Generally shouldn't be necessary to change and defaults to "1920x1080x24".
+`--screen-size` sets the Xvfb screen size. Generally shouldn't be necessary to change and defaults to "1920x1080x24".  
 
 ## License
 
