@@ -7,9 +7,8 @@ LABEL maintainer="tmp6154@yandex.ru"
 RUN apt-get update
 RUN apt-get upgrade -y
 
-# Install decent monospace fonts 
+# Install a decent monospace font
 RUN apt-get install fonts-dejavu -y
-RUN apt-get install fonts-noto -y
 
 # Install x11-apps for xwd (X Window Dump), needed for screenshots
 RUN apt-get install x11-apps -y
