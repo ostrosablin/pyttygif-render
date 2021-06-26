@@ -26,7 +26,7 @@ You can see the full usage help by running container without options:
                               [--font-family FONT_FAMILY] [--font-linechars]
                               [--cursor-shape {0,1,2}] [-W WIDTH] [-H HEIGHT]
                               [-s SPEED] [-l LOOP] [-L LASTFRAME] [-o {0,1,2,3}]
-                              [-f FPS] [-c DELAYCAP] [-x LOSSY] [-v]
+                              [-f FPS] [-c DELAYCAP] [-x LOSSY] [-e ENCODING] [-v]
                               [--video-only] [--crf CRF] [--tune TUNE]
                               [--preset PRESET] [-r FRAMERATE]
                               input output
@@ -75,6 +75,8 @@ You can see the full usage help by running container without options:
                             Cap the display time of single frame (in seconds)
       -x LOSSY, --lossy LOSSY
                             Use gifsicle lossy GIF compression ratio
+      -e ENCODING, --encoding ENCODING
+                            Reencode ttyrec to match terminal (source:target)
     
     MP4 conversion settings:
       -v, --video           Whether to create a video
@@ -96,6 +98,7 @@ Most options are intended to have sane defaults, but can be customized.
 `-f` sets the number of frames for pyttygif to screenshot per second. It defaults to 25, but if resulting GIF has stuttering or frame skip artifacts - you can lower it.  
 `-c` allows to cap delay of single frame to at most this number of seconds (floating point). It's disabled by default. For example, if it's set to 5.0, then any frames taking longer than 5 seconds would display for exactly 5 seconds.  
 `-x` sets lossiness for gifsicle lossy mode.  
+`-e` allows to specify source terminal (ttyrec) encoding and comma-separated target terminal encoding and re-encode ttyrec on-the-fly. This is intended e.g. for NetHack ttyrecs with IBMgraphics, where resulting ttyrecs are CP437 and they don't play back correctly on UTF-8 terminals. By specifying `-e cp437:utf-8` option, pyttygif would produce a correct GIF.  
 
 ### Konsole visualization settings
 
