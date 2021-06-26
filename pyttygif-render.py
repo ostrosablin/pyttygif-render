@@ -80,6 +80,8 @@ advgroup.add_argument('-c', '--delaycap', default=None, type=float,
                       help="Cap the display time of single frame (in seconds)")
 advgroup.add_argument('-x', '--lossy', default=None, type=int,
                       help="Use gifsicle lossy GIF compression ratio")
+advgroup.add_argument('-e', '--encoding', default=None,
+                      help="Reencode ttyrec to match terminal (source:target)")
 
 videogroup = parser.add_argument_group("MP4 conversion settings")
 videogroup.add_argument('-v', '--video', default=False, action='store_true',
@@ -168,6 +170,8 @@ if args.delaycap is not None:
     pyttygifargs.append(f"-c {args.delaycap}")
 if args.lossy is not None:
     pyttygifargs.append(f"-x {args.lossy}")
+if args.encoding is not None:
+    pyttygifargs.append(f"-e {args.encoding}")
 pyttygifargs.append(f"2>| {args.output}.log\'")
 pyttygifargs = ' '.join(pyttygifargs)
 
