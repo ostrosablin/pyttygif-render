@@ -21,6 +21,7 @@ import sys
 import subprocess
 import shlex
 import pathlib
+import math
 
 # Consts
 X_TOKEN = '/tmp/pyttygif.xvfb.auth'
@@ -82,6 +83,11 @@ advgroup.add_argument('-x', '--lossy', default=None, type=int,
                       help="Use gifsicle lossy GIF compression ratio")
 advgroup.add_argument('-e', '--encoding', default=None,
                       help="Reencode ttyrec to match terminal (source:target)")
+advgroup.add_argument(
+    '-C', '--logarithmic', const=math.e, default=None,
+    type=float, nargs="?",
+    help="Enable logarithmic time compression (default base = e)"
+)
 
 videogroup = parser.add_argument_group("MP4 conversion settings")
 videogroup.add_argument('-v', '--video', default=False, action='store_true',
@@ -172,6 +178,8 @@ if args.lossy is not None:
     pyttygifargs.append(f"-x {args.lossy}")
 if args.encoding is not None:
     pyttygifargs.append(f"-e {args.encoding}")
+if args.logarithmic is not None:
+    pyttygifargs.append(f"-C {args.logarithmic}")
 pyttygifargs.append(f"2>| {args.output}.log\'")
 pyttygifargs = ' '.join(pyttygifargs)
 
@@ -202,7 +210,7 @@ if args.video:
     cmd = ["ffmpeg", "-i", args.output, "-movflags", "faststart", "-pix_fmt",
            "yuv420p", "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2", "-an", "-r",
            str(args.framerate), "-crf", str(args.crf), "-tune", args.tune,
-           "-preset", args.preset, f'{args.output}.mp4']
+           "-y", "-preset", args.preset, f'{args.output}.mp4']
     subprocess.check_call(cmd)
 
 # If we want video only - remove source GIF

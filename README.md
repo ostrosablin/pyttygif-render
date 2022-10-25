@@ -26,14 +26,14 @@ You can see the full usage help by running container without options:
                               [--font-family FONT_FAMILY] [--font-linechars]
                               [--cursor-shape {0,1,2}] [-W WIDTH] [-H HEIGHT]
                               [-s SPEED] [-l LOOP] [-L LASTFRAME] [-o {0,1,2,3}]
-                              [-f FPS] [-c DELAYCAP] [-x LOSSY] [-e ENCODING] [-v]
-                              [--video-only] [--crf CRF] [--tune TUNE]
-                              [--preset PRESET] [-r FRAMERATE]
+                              [-f FPS] [-c DELAYCAP] [-x LOSSY] [-e ENCODING]
+                              [-C [LOGARITHMIC]] [-v] [--video-only] [--crf CRF]
+                              [--tune TUNE] [--preset PRESET] [-r FRAMERATE]
                               input output
     
     pyttygif-render - Convert a ttyrec to GIF/MP4 animation
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
     
     Xvfb settings:
@@ -77,6 +77,8 @@ You can see the full usage help by running container without options:
                             Use gifsicle lossy GIF compression ratio
       -e ENCODING, --encoding ENCODING
                             Reencode ttyrec to match terminal (source:target)
+      -C [LOGARITHMIC], --logarithmic [LOGARITHMIC]
+                            Enable logarithmic time compression (default base = e)
     
     MP4 conversion settings:
       -v, --video           Whether to create a video
@@ -99,6 +101,7 @@ Most options are intended to have sane defaults, but can be customized.
 `-c` allows to cap delay of single frame to at most this number of seconds (floating point). It's disabled by default. For example, if it's set to 5.0, then any frames taking longer than 5 seconds would display for exactly 5 seconds.  
 `-x` sets lossiness for gifsicle lossy mode.  
 `-e` allows to specify source terminal (ttyrec) encoding and comma-separated target terminal encoding and re-encode ttyrec on-the-fly. This is intended e.g. for NetHack ttyrecs with IBMgraphics, where resulting ttyrecs are CP437 and they don't play back correctly on UTF-8 terminals. By specifying `-e cp437:utf-8` option, pyttygif would produce a correct GIF.  
+`-C` enables logarithmic time compression. By default, natural logarithm (base e) is used, like in IPBT, however you may optionally specify any other valid base. This option will cause delays to be scaled non-linearly. Extremely large delays will be compressed significantly (e.g. hour-long delay will turn into several seconds), while small delays will have negligible difference. It works together with speed adjustment, too.
 
 ### Konsole visualization settings
 
