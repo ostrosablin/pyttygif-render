@@ -18,8 +18,8 @@ RUN apt-get update && \
     python3 \
     python3-pip -y
 
-# Install pyttygif
-RUN pip3 install pyttygif
+# Install pyttygif and pyte
+RUN pip3 install pyttygif pyte
 
 # Write Konsole config
 RUN mkdir -p /root/.config/

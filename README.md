@@ -20,11 +20,12 @@ This would produce a `sample.gif` in the current directory, converted with defau
 
 You can see the full usage help by running container without options:
 
+
     usage: pyttygif-render.py [-h] [--screen-size SCREEN_SIZE] [--no-antialias]
                               [--bold-intense] [--color-scheme COLOR_SCHEME]
                               [--font FONT] [-S FONT_SIZE]
                               [--font-family FONT_FAMILY] [--font-linechars]
-                              [--cursor-shape {0,1,2}] [-W WIDTH] [-H HEIGHT]
+                              [--cursor-shape {0,1,2}] [-W WIDTH] [-H HEIGHT] [-a]
                               [-s SPEED] [-l LOOP] [-L LASTFRAME] [-o {0,1,2,3}]
                               [-f FPS] [-c DELAYCAP] [-x LOSSY] [-e ENCODING]
                               [-C [LOGARITHMIC]] [-v] [--video-only] [--crf CRF]
@@ -57,6 +58,8 @@ You can see the full usage help by running container without options:
                             Terminal size, columns
       -H HEIGHT, --height HEIGHT
                             Terminal size, rows
+      -a, --autodetect-size
+                            Try to autodetect minimal needed terminal size
     
     pyttygif basic conversion settings:
       input                 Path to the ttyrec file to convert
@@ -105,6 +108,7 @@ Most options are intended to have sane defaults, but can be customized.
 
 ### Konsole visualization settings
 
+`-a` enables terminal width and height autodetection. An extra playback simulation pass is run before actual rendering to compute minimal required terminal dimensions to fit ttyrec.  
 `-W` sets terminal size in columns (width). Defaults to 80.  
 `-H` sets terminal size in rows (height). Defaults to 24.  
 `-S` sets the font size in pts. Defaults to 9.  

@@ -59,6 +59,8 @@ termgroup.add_argument('-W', '--width', default=80, type=int,
                        help="Terminal size, columns")
 termgroup.add_argument('-H', '--height', default=24, type=int,
                        help="Terminal size, rows")
+termgroup.add_argument('-a', '--autodetect-size', action='store_true',
+                       help="Try to autodetect minimal needed terminal size")
 
 maingroup = parser.add_argument_group("pyttygif basic conversion settings")
 maingroup.add_argument('input', default=None,
@@ -110,6 +112,45 @@ except argparse.ArgumentError:
     parser.print_help()
     sys.exit(0)
 
+width = args.width
+height = args.height
+
+if args.autodetect_size:
+    import pyte
+    from pyttygif.ttyplay import TtyPlay
+
+    class Cursor(pyte.screens.Cursor):
+
+        maxx = maxy = 0
+
+        @property
+        def x(self):
+            return self._x
+
+        @x.setter
+        def x(self, value):
+            self._x = value
+            Cursor.maxx = max(Cursor.maxx, value)
+
+        @property
+        def y(self):
+            return self._y
+
+        @y.setter
+        def y(self, value):
+            self._y = value
+            Cursor.maxy = max(Cursor.maxy, value + 1)
+
+    pyte.screens.Cursor = Cursor
+    screen = pyte.Screen(4096, 1024)
+    stream = pyte.Stream(screen)
+    with TtyPlay(args.input) as player:
+        while player.read_frame():
+            stream.feed(str(player.frame, errors='ignore'))
+
+    width = Cursor.maxx
+    height = Cursor.maxy
+
 # Prepare a xvfb commandline
 
 xvfbargs = ['xvfb-run', '-f', X_TOKEN, '-a', '-s',
@@ -131,8 +172,8 @@ CursorShape={args.cursor_shape}
 Environment=TERM=konsole-256color,COLORTERM=truecolor
 Name=pyttygif
 Parent=FALLBACK/
-TerminalColumns={args.width}
-TerminalRows={args.height}
+TerminalColumns={width}
+TerminalRows={height}
 
 [KonsoleWindow]
 ShowMenuBarByDefault=false
