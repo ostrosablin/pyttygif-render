@@ -85,11 +85,8 @@ advgroup.add_argument('-x', '--lossy', default=None, type=int,
                       help="Use gifsicle lossy GIF compression ratio")
 advgroup.add_argument('-e', '--encoding', default=None,
                       help="Reencode ttyrec to match terminal (source:target)")
-advgroup.add_argument(
-    '-C', '--logarithmic', const=math.e, default=None,
-    type=float, nargs="?",
-    help="Enable logarithmic time compression (default base = e)"
-)
+advgroup.add_argument('-C', '--logarithmic', action='store_true',
+                      help="Enable logarithmic time compression (base = e)")
 
 videogroup = parser.add_argument_group("MP4 conversion settings")
 videogroup.add_argument('-v', '--video', default=False, action='store_true',
@@ -219,8 +216,8 @@ if args.lossy is not None:
     pyttygifargs.append(f"-x {args.lossy}")
 if args.encoding is not None:
     pyttygifargs.append(f"-e {args.encoding}")
-if args.logarithmic is not None:
-    pyttygifargs.append(f"-C {args.logarithmic}")
+if args.logarithmic:
+    pyttygifargs.append(f"-C")
 pyttygifargs.append(f"2>| {args.output}.log\'")
 pyttygifargs = ' '.join(pyttygifargs)
 
