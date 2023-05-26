@@ -19,6 +19,7 @@ import argparse
 import os
 import sys
 import subprocess
+import multiprocessing
 import shlex
 import pathlib
 import math
@@ -77,6 +78,11 @@ advgroup.add_argument('-L', '--lastframe', default=5.0, type=float,
                       help="How long to display the last frame")
 advgroup.add_argument('-o', '--optimize-level', default=2, choices=range(0, 4),
                       type=int, help="Optimize the GIF (levels 0-3)")
+advgroup.add_argument('-m', '--no-conserve-memory', default=False,
+                      action='store_true', help="Use more RAM for speedup")
+advgroup.add_argument('-b', '--max-backlog',
+                      default=multiprocessing.cpu_count(), type=int,
+                      help="In-RAM image backlog size (0 = infinite)")
 advgroup.add_argument('-f', '--fps', default=25, type=int,
                       help="How many frames to screenshot per second")
 advgroup.add_argument('-c', '--delaycap', default=None, type=float,
@@ -218,6 +224,10 @@ if args.encoding is not None:
     pyttygifargs.append(f"-e {args.encoding}")
 if args.logarithmic:
     pyttygifargs.append(f"-C")
+if args.max_backlog:
+    pyttygifargs.append(f"-b {args.max_backlog}")
+if args.no_conserve_memory:
+    pyttygifargs.append(f"-m")
 pyttygifargs.append(f"2>| {args.output}.log\'")
 pyttygifargs = ' '.join(pyttygifargs)
 
