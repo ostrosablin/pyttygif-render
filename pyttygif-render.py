@@ -147,7 +147,7 @@ if args.autodetect_size:
     pyte.screens.Cursor = Cursor
     screen = pyte.Screen(4096, 1024)
     stream = pyte.Stream(screen)
-    with TtyPlay(args.input) as player:
+    with TtyPlay(args.input, encoding=args.encoding) as player:
         while player.read_frame():
             stream.feed(str(player.frame, errors='ignore'))
 
